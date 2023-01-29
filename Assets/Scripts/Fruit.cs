@@ -9,7 +9,6 @@ public class Fruit : MonoBehaviour {
     private bool fruitIsCut = false;
     private Blade blade;
     private void Awake() {
-        Debug.Log(whole.transform.lossyScale.x);
         fruitRigidbody = GetComponent<Rigidbody>();
         juiceParticleEffect = GetComponentInChildren<ParticleSystem>();
         var player = GameObject.FindWithTag("Player");
@@ -19,8 +18,6 @@ public class Fruit : MonoBehaviour {
     }
 
     private void Slice(Vector3 direction, Vector3 position, float force) {
-        if (fruitIsCut) return;
-        fruitIsCut = true;
         whole.SetActive(false);
         sliced.SetActive(true);
         juiceParticleEffect.Play();
@@ -34,26 +31,30 @@ public class Fruit : MonoBehaviour {
     }
 
     private void Update() {
-        Debug.Log(blade.bladeTrailPositionsCount);
+        if (!fruitIsCut) {
+            CheckBladeNearTheFruit();
+        }
+    }
+
+    private void CheckBladeNearTheFruit() {
         if (blade.slicing) {
             if (blade.bladeTrailPositionsCount > 0) {
                 for (int i = 1; i < blade.bladeTrailPositionsCount; i++) {
                     var position = blade.bladeTrailPositions[i];
-                    var prevPosition = blade.bladeTrailPositions[i - 1];
-                    var direction = position - prevPosition;
-                    var velocity = direction.magnitude / Time.deltaTime;
-                    Debug.Log("Velocity: " + velocity / 50);
-                    if (Mathf.Abs(fruitRigidbody.position.y - position.y) < whole.transform.lossyScale.y
+                    bool bladeNearTheFruit =
+                    Mathf.Abs(fruitRigidbody.position.y - position.y) < whole.transform.lossyScale.y
                     &&
-                     Mathf.Abs(fruitRigidbody.position.x - position.x) < whole.transform.lossyScale.x
-                     ) {
-                        Slice(direction, position, velocity / 50);
+                    Mathf.Abs(fruitRigidbody.position.x - position.x) < whole.transform.lossyScale.x;
+                    if (bladeNearTheFruit) {
+                        var prevPosition = blade.bladeTrailPositions[i - 1];
+                        var direction = position - prevPosition;
+                        Slice(direction, position, blade.sliceForce);
+                        fruitIsCut = true;
+                        return;
                     }
                 }
 
             }
         }
-
     }
-
 }

@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class Blade : MonoBehaviour {
 
-    public Collider bladeCollider;
     public TrailRenderer bladeTrail;
     public bool slicing = false;
-    public Vector3 direction { get; private set; }
-    public float minSliceVelocity = 0.01f;
     public float sliceForce = 5f;
     public Vector3[] bladeTrailPositions = new Vector3[100];
     public int bladeTrailPositionsCount = 0;
@@ -34,23 +31,17 @@ public class Blade : MonoBehaviour {
         var newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPosition.z = 0f;
         transform.position = newPosition;
-
         slicing = true;
-        bladeCollider.enabled = true;
         bladeTrail.enabled = true;
         bladeTrail.Clear();
     }
     private void StopSlicing() {
         slicing = false;
-        bladeCollider.enabled = false;
         bladeTrail.enabled = false;
     }
     private void ContinueSlicing() {
         var newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPosition.z = 0f;
-        direction = newPosition - transform.position;
-        var velocity = direction.magnitude / Time.deltaTime;
-        bladeCollider.enabled = velocity > minSliceVelocity;
         transform.position = newPosition;
     }
 }
