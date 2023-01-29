@@ -4880,7 +4880,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6670661972943083512}
   - component: {fileID: 2132424309715076344}
-  - component: {fileID: 6430482950192477092}
   - component: {fileID: 553794250941790577}
   m_Layer: 0
   m_Name: Fruit_Base
@@ -4923,19 +4922,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &6430482950192477092
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8225211746339725908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &553794250941790577
 MonoBehaviour:
   m_ObjectHideFlags: 0

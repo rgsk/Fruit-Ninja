@@ -4,11 +4,12 @@ public class Blade : MonoBehaviour {
 
     public Collider bladeCollider;
     public TrailRenderer bladeTrail;
-    private bool slicing = false;
+    public bool slicing = false;
     public Vector3 direction { get; private set; }
     public float minSliceVelocity = 0.01f;
     public float sliceForce = 5f;
-
+    public Vector3[] bladeTrailPositions = new Vector3[100];
+    public int bladeTrailPositionsCount = 0;
     private void OnEnable() {
         StopSlicing();
     }
@@ -26,6 +27,7 @@ public class Blade : MonoBehaviour {
         } else if (slicing) {
             ContinueSlicing();
         }
+        bladeTrailPositionsCount = bladeTrail.GetPositions(bladeTrailPositions);
     }
     private void StartSlicing() {
         // when we start slicing we move the blade position to where the cursor is
