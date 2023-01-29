@@ -4,6 +4,10 @@ public class Spawner : MonoBehaviour {
     private Collider spawnArea;
 
     public GameObject[] fruitPrefabs;
+    public GameObject bombPrefab;
+
+    [Range(0f, 1f)]
+    public float bombChance = .05f;
 
     public float minSpawnDelay = .25f;
     public float maxSpawnDelay = 1f;
@@ -28,10 +32,14 @@ public class Spawner : MonoBehaviour {
         // 2 seconds delay before this starts spawning
         yield return new WaitForSeconds(2f);
         while (enabled) {
-            // spawn a fruit
-            var prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
-            Vector3 position = new Vector3(
-            );
+            GameObject prefab;
+            if (Random.value < bombChance) {
+                prefab = bombPrefab;
+            } else {
+                prefab = fruitPrefabs[Random.Range(0, fruitPrefabs.Length)];
+            }
+
+            Vector3 position = new Vector3();
             position.x = Random.Range(spawnArea.bounds.min.x, spawnArea.bounds.max.x);
             position.y = Random.Range(spawnArea.bounds.min.y, spawnArea.bounds.max.y);
             position.z = Random.Range(spawnArea.bounds.min.z, spawnArea.bounds.max.z);

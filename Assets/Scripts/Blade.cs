@@ -5,8 +5,8 @@ public class Blade : MonoBehaviour {
     public TrailRenderer bladeTrail;
     public bool slicing = false;
     public float sliceForce = 5f;
-    public Vector3[] bladeTrailPositions = new Vector3[100];
-    public int bladeTrailPositionsCount = 0;
+    private Vector3[] bladeTrailPositions = new Vector3[100];
+    private int bladeTrailPositionsCount = 0;
     private void OnEnable() {
         StopSlicing();
     }
@@ -44,4 +44,25 @@ public class Blade : MonoBehaviour {
         newPosition.z = 0f;
         transform.position = newPosition;
     }
+    public (Vector3 direction, Vector3 position)? CheckObjectIsNear(Rigidbody body) {
+        if (slicing) {
+            if (bladeTrailPositionsCount > 0) {
+                for (int i = 1; i < bladeTrailPositionsCount; i++) {
+                    var position = bladeTrailPositions[i];
+                    bool bladeNearTheFruit =
+                    Mathf.Abs(body.position.y - position.y) < body.transform.lossyScale.y
+                    &&
+                    Mathf.Abs(body.position.x - position.x) < body.transform.lossyScale.x;
+                    if (bladeNearTheFruit) {
+                        var prevPosition = bladeTrailPositions[i - 1];
+                        var direction = position - prevPosition;
+                        return (direction, position);
+                    }
+                }
+
+            }
+        }
+        return null;
+    }
+
 }

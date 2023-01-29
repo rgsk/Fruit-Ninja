@@ -41,24 +41,10 @@ public class Fruit : MonoBehaviour {
     }
 
     private void CheckBladeNearTheFruit() {
-        if (blade.slicing) {
-            if (blade.bladeTrailPositionsCount > 0) {
-                for (int i = 1; i < blade.bladeTrailPositionsCount; i++) {
-                    var position = blade.bladeTrailPositions[i];
-                    bool bladeNearTheFruit =
-                    Mathf.Abs(fruitRigidbody.position.y - position.y) < whole.transform.lossyScale.y
-                    &&
-                    Mathf.Abs(fruitRigidbody.position.x - position.x) < whole.transform.lossyScale.x;
-                    if (bladeNearTheFruit) {
-                        var prevPosition = blade.bladeTrailPositions[i - 1];
-                        var direction = position - prevPosition;
-                        Slice(direction, position, blade.sliceForce);
-                        fruitIsCut = true;
-                        return;
-                    }
-                }
-
-            }
+        var details = blade.CheckObjectIsNear(fruitRigidbody);
+        if (details.HasValue) {
+            Slice(details.Value.direction, details.Value.position, blade.sliceForce);
+            fruitIsCut = true;
         }
     }
 }
