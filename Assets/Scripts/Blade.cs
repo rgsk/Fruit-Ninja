@@ -7,6 +7,7 @@ public class Blade : MonoBehaviour {
     private bool slicing = false;
     public Vector3 direction { get; private set; }
     public float minSliceVelocity = 0.01f;
+    public float sliceForce = 5f;
 
     private void OnEnable() {
         StopSlicing();
