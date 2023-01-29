@@ -1,12 +1,12 @@
 ## Resources referred
 
-- Code - [https://github.com/zigurous/unity-minesweeper-tutorial](https://github.com/zigurous/unity-minesweeper-tutorial)
-- Video - [https://youtu.be/HBrF8LJ0Hfg](https://youtu.be/HBrF8LJ0Hfg)
+- Code - [https://github.com/zigurous/unity-fruit-ninja-tutorial](https://github.com/zigurous/unity-fruit-ninja-tutorial)
+- Video - [https://www.youtube.com/watch?v=xTT1Ae_ifhM](https://www.youtube.com/watch?v=xTT1Ae_ifhM)
 
-# Minesweeper (2D)
+# Fruit Ninja
 
-> Minesweeper is a single-player puzzle game that originated in the 1960s. The objective of the game is to clear a rectangular board containing hidden "mines" or bombs without detonating any of them, with help from clues about the number of neighboring mines in each field.
+> Fruit Ninja is a mobile game developed by Halfbrick Studios that released in April 2010 on the iOS App Store. In Fruit Ninja, the player slices fruit with a blade controlled via the touch screen. As the fruit is thrown onto the screen, the player swipes their finger across the screen to create a slicing motion, attempting to slice the fruit in half.
 
 ## Preview
 
-![minesweeper preview](https://i.ibb.co/7XQk6Vz/Screenshot-2023-01-28-at-9-06-49-PM.png)
+![preview image](Screenshot%202023-01-29%20at%209.19.01%20PM.png)
