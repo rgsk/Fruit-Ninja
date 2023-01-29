@@ -6,13 +6,11 @@ public class Bomb : MonoBehaviour {
 
     private bool bombIsHit = false;
 
-
+    private GameManager gameManager;
     private void Awake() {
         bombRigidbody = GetComponent<Rigidbody>();
-        var player = GameObject.FindWithTag("Player");
-        if (player != null) {
-            blade = player.GetComponent<Blade>();
-        }
+        gameManager = FindObjectOfType<GameManager>();
+        blade = FindObjectOfType<Blade>();
     }
 
     private void Update() {
@@ -23,7 +21,7 @@ public class Bomb : MonoBehaviour {
     private void CheckBladeNearTheBomb() {
         var details = blade.CheckObjectIsNear(bombRigidbody);
         if (details != null) {
-            Debug.Log("Bomb hit");
+            gameManager.GameOver();
             bombIsHit = true;
         }
     }

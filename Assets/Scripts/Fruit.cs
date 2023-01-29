@@ -13,10 +13,7 @@ public class Fruit : MonoBehaviour {
     private void Awake() {
         fruitRigidbody = GetComponent<Rigidbody>();
         juiceParticleEffect = GetComponentInChildren<ParticleSystem>();
-        var player = GameObject.FindWithTag("Player");
-        if (player != null) {
-            blade = player.GetComponent<Blade>();
-        }
+        blade = FindObjectOfType<Blade>();
         gameManager = FindObjectOfType<GameManager>();
     }
 
