@@ -8,7 +8,8 @@ public class Fruit : MonoBehaviour {
     private ParticleSystem juiceParticleEffect;
     private bool fruitIsCut = false;
     private Blade blade;
-    public GameManager gameManager;
+    private GameManager gameManager;
+    public int points = 1;
     private void Awake() {
         fruitRigidbody = GetComponent<Rigidbody>();
         juiceParticleEffect = GetComponentInChildren<ParticleSystem>();
@@ -20,7 +21,7 @@ public class Fruit : MonoBehaviour {
     }
 
     private void Slice(Vector3 direction, Vector3 position, float force) {
-        gameManager.IncreaseScore();
+        gameManager.IncreaseScore(points);
         whole.SetActive(false);
         sliced.SetActive(true);
         juiceParticleEffect.Play();

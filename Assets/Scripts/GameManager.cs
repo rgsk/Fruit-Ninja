@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour {
         scoreText.text = score.ToString();
     }
 
-    public void IncreaseScore() {
-        score++;
+    public void IncreaseScore(int points) {
+        score += points;
         scoreText.text = score.ToString();
     }
 }
