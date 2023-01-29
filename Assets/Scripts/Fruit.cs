@@ -7,6 +7,8 @@ public class Fruit : MonoBehaviour {
     private Rigidbody fruitRigidbody;
     private ParticleSystem juiceParticleEffect;
     private bool fruitIsCut = false;
+    private bool fruitIsFallen = false;
+    private bool fruitIsOnScreen = false;
     private Blade blade;
     private GameManager gameManager;
     public int points = 1;
@@ -32,8 +34,9 @@ public class Fruit : MonoBehaviour {
     }
 
     private void Update() {
-        if (!fruitIsCut) {
+        if (!fruitIsCut && !fruitIsFallen) {
             CheckBladeNearTheFruit();
+            CheckFallen();
         }
     }
 
@@ -43,5 +46,25 @@ public class Fruit : MonoBehaviour {
             Slice(details.Value.direction, details.Value.position, blade.sliceForce);
             fruitIsCut = true;
         }
+    }
+
+
+
+    private void CheckFallen() {
+        var fruitPosition = fruitRigidbody.position;
+        var position = Camera.main.WorldToViewportPoint(fruitPosition);
+        if (position.y > 0 && !fruitIsOnScreen) {
+            fruitIsOnScreen = true;
+            // Debug.Log("Fruit Entered");
+        }
+        if (position.y < 0 && fruitIsOnScreen) {
+            fruitIsFallen = true;
+            fruitIsOnScreen = false;
+            // Debug.Log("Fruit Fallen");
+            OnFall();
+        }
+    }
+    private void OnFall() {
+        gameManager.GameOver();
     }
 }
